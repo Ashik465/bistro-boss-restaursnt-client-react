@@ -1,0 +1,20 @@
+.carousel {
+    position: relative;
+  }
+  
+  .carousel .thumbs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Adjust as needed */
+  }
+  
+  .carousel .thumbs-wrapper .thumb {
+    margin: 0 5px; /* Adjust as needed */
+  }
+  
+  .carousel .thumbs-wrapper .thumb img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
