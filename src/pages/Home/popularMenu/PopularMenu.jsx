@@ -31,6 +31,7 @@ const PopularMenu = () => {
             <div className=" grid grid-cols-1 md:grid-cols-2 my-10 gap-4">
                 {menu.map(item => <MenuItem item={item} key={item._id}></MenuItem>)}
             </div>
+           <div className="text-center">  <button className=" uppercase btn btn-outline border-0 border-b-4 ">view full Menu</button></div>
         </>
     );
 };
