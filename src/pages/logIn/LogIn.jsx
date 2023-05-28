@@ -6,14 +6,17 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const LogIn = () => {
  
   const [disableBtn, setDisableBtn] = useState(true);
   const { emailSignIn} = useContext(AuthContext)
+  const location = useLocation()
+  const navigate = useNavigate()
   
+  const from = location.state?.pathname || '/'
   
   // load captcha
     useEffect(() => {
@@ -52,6 +55,8 @@ const LogIn = () => {
             popup: 'animate__animated animate__fadeOutUp'
           }
         })
+
+        navigate(from , {replace:true})
       }
       )
       .catch((error) => {
