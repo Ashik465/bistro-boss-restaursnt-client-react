@@ -1,18 +1,22 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 import Footer from "../pages/shared/footer/Footer";
 import NavBar from "../pages/shared/navbar/NavBar";
 
-
 const MainLayout = () => {
-    return (
-        <>
-          <NavBar></NavBar>
-          <Outlet></Outlet> 
-          <Footer></Footer>
+  const location = useLocation();
+  // console.log(location)
+  const NoHeaderFooter = location.pathname.includes("login");
 
+  return (
+    <>
+      {NoHeaderFooter || <NavBar></NavBar>}
+      <Outlet></Outlet>
 
-        </>
-    );
+      {NoHeaderFooter || <Footer></Footer>}
+
+      <ScrollRestoration></ScrollRestoration>
+    </>
+  );
 };
 
 export default MainLayout;
