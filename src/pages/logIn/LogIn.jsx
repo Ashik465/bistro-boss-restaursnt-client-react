@@ -1,28 +1,31 @@
+import { useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const LogIn = () => {
   const captchaRef = useRef(null);
   const [disableBtn, setDisableBtn] = useState(true);
-  // catcha useeffect
-
-  useEffect(() => {
+  const { emailSignIn} = useContext(AuthContext)
+  
+  
+  // load captcha
+    useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
 
   // validate captcha
   const handleValidateCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
-    if (validateCaptcha(user_captcha_value)==true) {
-        setDisableBtn(false)
-    }
-
-    else {
-        setDisableBtn(true)
+    if (validateCaptcha(user_captcha_value) == true) {
+      setDisableBtn(false);
+    } else {
+      setDisableBtn(true);
     }
   };
 
@@ -32,6 +35,21 @@ const LogIn = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
+
+    emailSignIn(email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      }
+      )
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      }
+      );
   };
 
   return (
@@ -93,12 +111,13 @@ const LogIn = () => {
               </div>
               <div className="form-control mt-6">
                 <input
-                disabled={disableBtn}
+                  disabled={disableBtn}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"
                 />
               </div>
+              <p>New to bistro boss <Link className=" link-secondary" to="/signup">create an account </Link> </p>
             </form>
           </div>
         </div>
