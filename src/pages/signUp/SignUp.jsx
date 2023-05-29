@@ -3,13 +3,12 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, updateProfile } from "firebase/auth";
-import app from "../../firebase/firebase.config";
+
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { emailSignUp, setUser } = useContext(AuthContext);
-  const auth = getAuth(app);
+  const { emailSignUp, updateUserProfile } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const {
     register,
@@ -25,35 +24,27 @@ const SignUp = () => {
         // Signed in
         const loggedUser = result.user;
         console.log(loggedUser);
-        updateProfile(auth.currentUser, {
-          displayName: data.name,
-          photoURL: data.photoUrl,
-        })
+        updateUserProfile(data.name, data.photoUrl)
           .then(() => {
-            setUser((loggedUser) => {
-              const updatedLoggedUser = { ...loggedUser };
-              updatedLoggedUser.displayName = data.name;
-              updatedLoggedUser.photoURL = data.photoUrl;
+            // Profile updated!
+            // ...
 
-              return updatedLoggedUser;
+            reset();
+            navigate("/");
+
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "sign up succcess",
+              showConfirmButton: false,
+              timer: 1500,
             });
-            // setLoader(true)
-            // window.location.reload()
           })
           .catch((error) => {
             // An error occurred
             console.log(error);
+            // ...
           });
-        reset();
-        navigate("/");
-
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "sign up succcess",
-          showConfirmButton: false,
-          timer: 1500,
-        });
 
         // ...
       })
