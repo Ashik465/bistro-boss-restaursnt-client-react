@@ -31,6 +31,12 @@ const NavBar = () => {
       <li>
         <Link to="/secret">secret</Link>
       </li>
+      {/* <li>
+        <Link to="/secret">{user?.displayName}</Link>
+      </li>
+      <li>
+        <Link to="/secret"><img className="h-14 w-14" src={user?.photoURL} alt="" /></Link>
+      </li> */}
      
 
       { user? <li>
