@@ -47,7 +47,7 @@ const logOut = () => {
 
 
 
-    const authInfo = { user,loading,emailSignUp , emailSignIn , logOut };
+    const authInfo = { user,loading,emailSignUp , emailSignIn , logOut,setUser };
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
