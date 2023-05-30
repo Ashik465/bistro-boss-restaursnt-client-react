@@ -12,11 +12,12 @@ import Swal from "sweetalert2";
 const LogIn = () => {
  
   const [disableBtn, setDisableBtn] = useState(true);
+  console.log(disableBtn);
   const { emailSignIn} = useContext(AuthContext)
   const location = useLocation()
   const navigate = useNavigate()
   
-  const from = location.state?.pathname || '/'
+  const from = location.state?.from?.pathname || '/'
   
   // load captcha
     useEffect(() => {
@@ -120,9 +121,10 @@ const LogIn = () => {
                 />
                 
               </div>
+              {/* TODO : // disabled={disableBtn} */}
               <div className="form-control mt-6">
                 <input
-                  disabled={disableBtn}
+                  disabled={false}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"
