@@ -1,21 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import {FaShoppingCart } from 'react-icons/fa';
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const NavBar = () => {
-  const  {logOut,user} = useContext(AuthContext)
-// logout
+  const { logOut, user } = useContext(AuthContext);
+  // logout
   const handleLogOut = () => {
     logOut()
-    .then (() => {
-     
-    }
-    )
-    .catch((error) => {
-      console.log(error)
-    }
-    )
-  }
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const menuOptions = (
     <>
@@ -31,19 +28,32 @@ const NavBar = () => {
       <li>
         <Link to="/secret">secret</Link>
       </li>
+      <li>
+        <Link to="/">
+          <button className="btn gap-2">
+             <FaShoppingCart></FaShoppingCart>
+            <div className="badge badge-secondary">+99</div>
+          </button>
+        </Link>
+      </li>
       {/* <li>
         <Link to="/secret">{user?.displayName}</Link>
       </li>
       <li>
         <Link to="/secret"><img className="h-14 w-14" src={user?.photoURL} alt="" /></Link>
       </li> */}
-     
 
-      { user? <li>
-        <Link onClick={handleLogOut} className=" btn btn-ghost" to="/login">Logout</Link>
-      </li> : <li>
-        <Link to="/login">Log In</Link>
-      </li>  }
+      {user ? (
+        <li>
+          <Link onClick={handleLogOut} className=" btn btn-ghost" to="/login">
+            Logout
+          </Link>
+        </li>
+      ) : (
+        <li>
+          <Link to="/login">Log In</Link>
+        </li>
+      )}
     </>
   );
 
