@@ -28,17 +28,33 @@ const SignUp = () => {
           .then(() => {
             // Profile updated!
             // ...
+            const saveUser = { name: data.name, email: data.email };
+      fetch("http://localhost:5000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify( saveUser),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                navigate("/");
+    
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "sign up succcess",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+            })
+            
 
-            reset();
-            navigate("/");
 
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "sign up succcess",
-              showConfirmButton: false,
-              timer: 1500,
-            });
+            
           })
           .catch((error) => {
             // An error occurred

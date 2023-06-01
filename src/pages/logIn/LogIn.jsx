@@ -8,6 +8,7 @@ import {
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogIn from "../shared/socialLogin/SocialLogIn";
 
 const LogIn = () => {
  
@@ -132,6 +133,7 @@ const LogIn = () => {
               </div>
               <p>New to bistro boss <Link className=" link-secondary" to="/signup">create an account </Link> </p>
             </form>
+              <SocialLogIn></SocialLogIn>
           </div>
         </div>
       </div>
